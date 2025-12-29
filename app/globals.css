@@ -1,26 +1,159 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #05191b;
+  --foreground: #7fd3d8;
+  --componentBackground: #174a50;
+  --textColor: #e8f1f6;
+  --skillBoxTrue: #d97309;
+  --skillBoxHover: #492306;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--textColor);
   font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+}
+
+.swg-panel {
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: var(--foreground);
+  padding: 10px 12px;
+}
+
+.swg-panel-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.swg-panel-inner {
+  background: var(--componentBackground);
+  border-radius: 10px;
+  padding: 0;
+}
+
+.swg-panel-inner table{
+  width: 100%;
+  border-color: var(--background);
+}
+
+.swg-panel-inner tr{
+  text-align: left;
+}
+
+.swg-panel-inner td{
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--background);
+  padding: 0 10px;
+}
+
+.swg-panel ul{
+  cursor: pointer;
+}
+
+.swg-panel li{
+  padding: 0 10px;
+}
+
+.swg-border-light{
+  border-color: var(--foreground) !important;
+}
+
+.swg-panel li:hover{
+  background-color: color-mix(
+          in srgb,
+          var(--foreground) 25%,
+          transparent
+  );
+}
+
+.masterNextSkillTrees{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.masterNextSkillTrees p:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.skill-tree-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.master-box, .novice-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.skill-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.skill-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.skill-box {
+  background-color: var(--foreground);
+  color: white;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid var(--componentBackground);
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.skill-box:hover {
+  background-color: var(--componentBackground);
+  border-color: var(--foreground);
+}
+
+div.skill-box.is-owned {
+  background-color: var(--skillBoxTrue);
+}
+
+.skill-box.is-owned:hover {
+  background-color: var(--skillBoxHover);
+  border-color: var(--skillBoxTrue);
+}
+
+.previousSkillTrees{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.previousSkillTrees p:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.nextSkillTree {
+  text-align: center;
+  font-size: 14px;
+  color: var(--textColor);
+}
+
+.nextSkillTree p, .previousSkillTree p {
+  margin: 0;
 }
