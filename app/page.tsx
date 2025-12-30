@@ -11,9 +11,11 @@ import {SkillPointsAvailable} from "@/components/SkillPointsAvailable";
 import {SkillDetails} from "@/components/SkillDetails";
 import Papa from "papaparse"
 
+type SkillRow = Record<string, unknown>;
+
 export default function Home() {
 
-    const [rows, setRows] = useState([])
+    const [rows, setRows] = useState<SkillRow[]>([])
 
     // get example-skills.csv from /pubic
     useEffect(() => {
@@ -32,7 +34,7 @@ export default function Home() {
                     skipEmptyLines: true,
                     worker: true,
                     complete: (results) => {
-                        const data = results.data as any[];
+                        const data = results.data as SkillRow[];
 
                         // Drop SWG schema row if present
                         const cleaned =
@@ -44,7 +46,7 @@ export default function Home() {
 
                         setRows(cleaned);
                     },
-                    error: (e) => {
+                    error: (e:unknown) => {
                         console.log(e);
                     },
                 });
