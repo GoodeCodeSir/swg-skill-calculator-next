@@ -12,11 +12,13 @@ import {SkillDetails} from "@/components/SkillDetails";
 import Papa from "papaparse"
 import {getProfessionList} from "@/utils/getProfessionList";
 
+type SkillRow = Record<string, unknown>;
+
 export default function Home() {
 
-    const [rows, setRows] = useState([])
-    const [emulator, setEmulator] = useState('example');
+    const [rows, setRows] = useState<SkillRow[]>([])
 
+    const [emulator, setEmulator] = useState('example');
     const [professions, setProfessions] = useState([]);
 
 
@@ -35,7 +37,7 @@ export default function Home() {
                     skipEmptyLines: true,
                     worker: true,
                     complete: (results) => {
-                        const data = results.data as any[];
+                        const data = results.data as SkillRow[];
 
                         // Drop SWG schema row if present
                         const cleaned =
@@ -51,7 +53,7 @@ export default function Home() {
                         const professions = getProfessionList(cleaned);
                         setProfessions(professions);
                     },
-                    error: (e) => {
+                    error: (e:unknown) => {
                         console.log(e);
                     },
                 });
