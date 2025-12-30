@@ -10,20 +10,23 @@ import {PanelMyCertifications} from "@/components/PanelMyCertifications";
 import {SkillPointsAvailable} from "@/components/SkillPointsAvailable";
 import {SkillDetails} from "@/components/SkillDetails";
 import Papa from "papaparse"
+import {getProfessionList} from "@/utils/getProfessionList";
 
 export default function Home() {
 
     const [rows, setRows] = useState([])
+    const [emulator, setEmulator] = useState('example');
+
+    const [professions, setProfessions] = useState([]);
+
+
+
 
     // get example-skills.csv from /pubic
     useEffect(() => {
-
-
         fetch("/example-skills.csv")
             .then((res) => {
                 if (!res.ok) throw new Error("Failed to load CSV");
-
-                console.log(res);
                 return res.text();
             })
             .then((csvText) => {
@@ -43,6 +46,10 @@ export default function Home() {
                         console.log(cleaned);
 
                         setRows(cleaned);
+
+
+                        const professions = getProfessionList(cleaned);
+                        setProfessions(professions);
                     },
                     error: (e) => {
                         console.log(e);
@@ -50,7 +57,7 @@ export default function Home() {
                 });
             })
             .catch((err) => console.log(err.message));
-    }, []);
+    }, [emulator]);
 
 
     return (
