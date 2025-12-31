@@ -1,12 +1,4 @@
 "NAME","PARENT","GRAPH_TYPE","GOD_ONLY","IS_TITLE","IS_PROFESSION","IS_HIDDEN","MONEY_REQUIRED","POINTS_REQUIRED","SKILLS_REQUIRED_COUNT","SKILLS_REQUIRED","PRECLUSION_SKILLS","XP_TYPE","XP_COST","XP_CAP","MISSIONS_REQUIRED","APPRENTICESHIPS_REQUIRED","STATS_REQUIRED","SPECIES_REQUIRED","JEDI_STATE_REQUIRED","SKILL_ABILITY","COMMANDS","SKILL_MODS","SCHEMATICS_GRANTED","SCHEMATICS_REVOKED","SEARCHABLE","ENDER"
-"combat_melee_basic","",fourByFour,false,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
-"combat_ranged_weapons_basic","",fourByFour,false,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
-"demo_combat","",fourByFour,false,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
-"common_knowledge","",fourByFour,false,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
-"utility","",fourByFour,true,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
-"utility_beta","utility",fourByFour,true,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
-"utility_beta_demo_combat","utility_beta",fourByFour,true,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
-"utility_player","utility",fourByFour,true,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
 "social","",fourByFour,true,false,false,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
 "social_entertainer","social",fourByFour,false,false,true,false,0,0,0,"","","",0,0,"",0,"","",none,"","","","","",true,0
 "social_entertainer_novice","social_entertainer",fourByFour,false,true,false,false,100,15,0,"","","",0,0,"",0,"","",none,"","private_entertainer_novice,musician,dancer,imagedesigner,startDance,stopDance,startMusic,stopMusic,flourish+1,flourish+2,flourish+3,flourish+4,flourish+5,flourish+6,flourish+7,flourish+8,startDance+basic,startDance+rhythmic,startMusic+starwars1,slitherhorn","healing_dance_wound=5,healing_music_wound=5,healing_music_ability=5,healing_dance_ability=5,hair=1,face=1","craftInstrumentGroupA","",true,0

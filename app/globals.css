@@ -64,12 +64,18 @@ body {
   border-color: var(--foreground) !important;
 }
 
-.swg-panel li:hover{
+.swg-panel li.swg-profession:hover{
   background-color: color-mix(
           in srgb,
           var(--foreground) 25%,
           transparent
   );
+}
+
+.swg-profession-selected{
+  color: var(--foreground) !important;
+  font-weight: bold;
+
 }
 
 .masterNextSkillTrees{
@@ -114,18 +120,28 @@ body {
   background-color: var(--foreground);
   color: white;
   padding: 15px;
-  width: 200px;
+  min-width: 200px;
   text-align: center;
   font-weight: bold;
   border: 1px solid var(--componentBackground);
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   transition: background-color 120ms ease, border-color 120ms ease;
+  white-space: pre-line
+
 }
 
-.skill-box:hover {
+.skill-box.selected {
   background-color: var(--componentBackground);
   border-color: var(--foreground);
+}
+
+.skill-box:hover{
+  background-color: color-mix(
+          in srgb,
+          var(--foreground) 25%,
+          transparent
+  );
 }
 
 div.skill-box.is-owned {

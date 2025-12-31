@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {PanelProfessionList} from "@/components/PanelProfessionList";
 import {PanelRequiredExperience} from "@/components/PanelRequiredExperience";
 import {PanelSelectedProfession} from "@/components/PanelSelectedProfession";
@@ -11,18 +11,26 @@ import {SkillPointsAvailable} from "@/components/SkillPointsAvailable";
 import {SkillDetails} from "@/components/SkillDetails";
 import Papa from "papaparse"
 import {getProfessionList} from "@/utils/getProfessionList";
+import {getProfessionDetails} from "@/utils/getProfessionDetails";
+import {SkillRow} from "@/types/skills";
+import {ProfessionGroups} from "@/types/profession";
 
-type SkillRow = Record<string, unknown>;
 
 export default function Home() {
 
-    const [rows, setRows] = useState<SkillRow[]>([])
-
+    const [skillData, setSkillData] = useState<SkillRow[]>([])
     const [emulator, setEmulator] = useState('example');
-    const [professions, setProfessions] = useState([]);
+    const [professions, setProfessions] = useState<ProfessionGroups>({});
+
+    const [selectedProfession, setSelectedProfession] = useState('');
+    const [selectedSkill, setSelectedSkill] = useState<SkillRow|null>(null);
 
 
-
+    // derived value on change
+    const selectedProfessionDetail = useMemo(() => {
+        if (!selectedProfession) return null;
+        return getProfessionDetails(selectedProfession, skillData);
+    }, [selectedProfession, skillData]);
 
     // get example-skills.csv from /pubic
     useEffect(() => {
@@ -38,22 +46,12 @@ export default function Home() {
                     worker: true,
                     complete: (results) => {
                         const data = results.data as SkillRow[];
+                        setSkillData(data); // raw data that can be used later
 
-                        // Drop SWG schema row if present
-                        const cleaned =
-                            data.length && data[0]?.NAME === "s"
-                                ? data.slice(1)
-                                : data;
-
-                        console.log(cleaned);
-
-                        setRows(cleaned);
-
-
-                        const professions = getProfessionList(cleaned);
-                        setProfessions(professions);
+                        const professions:ProfessionGroups = getProfessionList(data);
+                        setProfessions(professions); // makes the list for the profession panel
                     },
-                    error: (e:unknown) => {
+                    error: (e: unknown) => {
                         console.log(e);
                     },
                 });
@@ -68,7 +66,7 @@ export default function Home() {
 
             <div className={'flex flex-row gap-2'}>
                 <aside className="min-w-[300px] flex flex-col gap-3">
-                    <PanelProfessionList/>
+                    <PanelProfessionList professions={professions} selectedProfession={selectedProfession} handleProfessionClick={setSelectedProfession}/>
                     <PanelRequiredExperience/>
                     <PanelMySkillMods/>
                     <PanelMyAbilities/>
@@ -76,8 +74,8 @@ export default function Home() {
                 </aside>
 
                 <main className={'flex-grow-1 flex flex-col gap-3'}>
-                    <PanelSelectedProfession/>
-                    <SkillDetails />
+                    <PanelSelectedProfession selectedProfession={selectedProfessionDetail} handleSkillClick={setSelectedSkill} activeSkillName={selectedSkill?.NAME}/>
+                    <SkillDetails selectedSkill={selectedSkill}/>
                     <SkillPointsAvailable/>
                 </main>
 
